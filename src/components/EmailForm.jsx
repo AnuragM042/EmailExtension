@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useApiKeys } from "../contexts/ApiKeyContext";
+import { useApiKeys } from "../context/ApiKeyContext";
 
 const EmailForm = () => {
   const { apiKey, apiSecret } = useApiKeys();
