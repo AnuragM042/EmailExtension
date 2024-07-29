@@ -1,18 +1,18 @@
+import React from "react";
+import { ApiKeyProvider } from "./contexts/ApiKeyContext";
+import ApiKeyForm from "./components/ApiKeyForm";
+import EmailForm from "./components/EmailForm"; // Your existing EmailForm component
 
-import React, { useState } from 'react';
-import EmailInput from './components/EmailInput';
-import ProfileForm from './components/ProfileForm';
-import ProfileList from './components/ProfileList';
-
-
-function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <>
-      <h1 className="text-xl font-bold">this is a test message</h1>
-    </>
+    <ApiKeyProvider>
+      <div className="App">
+        <h1>Email Extension</h1>
+        <ApiKeyForm />
+        <EmailForm />
+      </div>
+    </ApiKeyProvider>
   );
-}
+};
 
 export default App;

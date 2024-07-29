@@ -1,40 +1,31 @@
+// server/email.js
 import mailjet from "node-mailjet";
 
-const sendEmail = async (profile, senderEmail, receiverEmail) => {
-  const mailjetClient = mailjet.connect(
-    process.env.MAILJET_API_KEY,
-    process.env.MAILJET_API_SECRET
-  );
+const mj = mailjet.connect(
+  process.env.MAILJET_API_KEY,
+  process.env.MAILJET_API_SECRET
+);
 
-  const emailData = {
-    Messages: [
-      {
-        From: {
-          Email: senderEmail,
-          Name: "Your Name", // This can be dynamic if needed
-        },
-        To: [
-          {
-            Email: receiverEmail,
-            Name: "Receiver Name", // This can be dynamic if needed
-          },
-        ],
-        Subject: profile.subject,
-        TextPart: profile.info,
-        HTMLPart: profile.info,
-        Attachments: profile.attachments || [], // Handle attachments if any
-      },
-    ],
-  };
-
+export const sendEmail = async (profile, senderEmail, receiverEmail) => {
   try {
-    const result = await mailjetClient
-      .post("send", { version: "v3.1" })
-      .request(emailData);
-    console.log("Email sent:", result.body);
+    await mj.post("send").request({
+      Messages: [
+        {
+          From: {
+            Email: senderEmail,
+            Name: "Your Name",
+          },
+          To: [
+            {
+              Email: receiverEmail,
+            },
+          ],
+          Subject: profile.subject,
+          TextPart: profile.info,
+        },
+      ],
+    });
   } catch (error) {
-    console.error("Error sending email:", error);
+    throw new Error("Failed to send email: " + error.message);
   }
 };
-
-export { sendEmail };
