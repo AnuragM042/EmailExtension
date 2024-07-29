@@ -1,0 +1,6 @@
+# .env
+
+
+MAILJET_API_KEY=adb3659f5a350db5e471ce2bbf998d3c
+MAILJET_API_SECRET=14691a711f8072485fbf8cb03a2a88b2
+MONGODB_URI=mongodb+srv://anurazzzmishra098:masterball@emails.r5ct65s.mongodb.net/?retryWrites=true&w=majority&appName=Emails
